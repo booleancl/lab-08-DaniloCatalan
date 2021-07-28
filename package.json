@@ -1,0 +1,28 @@
+{
+  "name": "javascript-lab08",
+  "version": "1.0.0",
+  "description": "## Módulo 3: Pruebas Unitarias. Conocer y manejar los conceptos básicos de pruebas unitarias de software. ## Unidad 3: Dobles de prueba",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:ci": "jest --runInBand"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/booleancl/javascript-lab03.git"
+  },
+  "keywords": [],
+  "author": "Academia Boolean",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/booleancl/javascript-lab03/issues"
+  },
+  "homepage": "https://github.com/booleancl/javascript-lab03#readme",
+  "devDependencies": {
+    "jest": "^27.0.5"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
