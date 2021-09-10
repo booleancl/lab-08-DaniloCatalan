@@ -7,6 +7,7 @@ jest.mock('../SUT/models', () => {
   }
   const Attendance = {
     findAll: jest.fn(),
+    create: jest.fn()
   }
   return { Event, Attendance }
 })
@@ -20,7 +21,9 @@ describe('Attendance Controller Tests', () => {
       body: {},
       params: {},
       logger: {
-        Info: jest.fn().mockReturnValue(this),
+        Info: jest.fn().mockImplementation(function(){
+          return this
+        }),
         log: jest.fn()
       }
     }
@@ -45,4 +48,34 @@ describe('Attendance Controller Tests', () => {
     })
 
   })
+
+  it('Test 409', async() => {
+    Event.findOne.mockResolvedValue({})
+    Attendance.findAll.mockResolvedValue({})
+    
+    await attendanceController.markAttendanceInEvent(req, res)
+
+    expect(res.status).toHaveBeenCalledWith(409)
+    expect(res.json).toHaveBeenCalledWith({
+      message: 'Un usuario ya ha marcado asistencia en este dispositivo',
+      data: []
+    })
+  })
+
+  it('Test 201', async() => {
+    Event.findOne.mockResolvedValue({})
+    Attendance.findAll.mockResolvedValue(null)
+    Attendance.create.mockResolvedValue({id:1})
+    
+    await attendanceController.markAttendanceInEvent(req, res)
+
+    expect(res.status).toHaveBeenCalledWith(201)
+    expect(res.json).toHaveBeenCalledWith({
+      message: 'asistencia marcada correctamente',
+      data:{
+        id:1
+      }
+    })
+  })
+
 })

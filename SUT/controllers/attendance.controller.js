@@ -1,6 +1,16 @@
 const { Event, Attendance } = require('../models')
 
 module.exports = {
+  getMessage:(status) => {
+    switch (status) {
+      case 201:
+        break;
+      case 409:
+        break;
+      default:
+        break;
+    }
+  }, 
   markAttendanceInEvent: async (req, res) => {
     try {
       const { params, body } = req
@@ -55,11 +65,12 @@ module.exports = {
       return res
         .status(201)
         .json({
-          message,
+          message:"asistencia marcada correctamente",
           data: newAttendance
         })
   
     } catch (error) {
+      console.log(error.message)
       return res.status(500).json({
         message: error.message,
         data: []
